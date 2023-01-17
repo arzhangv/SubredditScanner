@@ -9,6 +9,9 @@
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 import requests
+import json
+import os.path
+from os import path
 
 
 from datetime import datetime, timedelta
@@ -25,18 +28,54 @@ class Reddit_Data:
         epoch_time = rawtime.timestamp()
         return int(epoch_time)
 
-    def wrtieToFile(self, subreddit_name, date, ):
+    def writeToFileSubmission(self ,subreddit_name, date, data):
+        date_adjusted = date.replace(" ", "")
+        date_adjusted = date_adjusted.replace("-", "_")
+        date_adjusted = date_adjusted.replace(":", "_")
+
+        fileName = subreddit_name + "Submission" + date_adjusted + ".json"
+        filePath = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\malwareSubmission"
+        file = filePath + "\\" + fileName
+
+        with open(file, "w") as outfile:
+            json.dump(data, outfile)
+    def writeToFile(self, subreddit_name, date, data):
+        date_adjusted = date.replace(" ", "")
+        date_adjusted = date_adjusted.replace("-", "_")
+        date_adjusted = date_adjusted.replace(":", "_")
+
+        fileName = subreddit_name + date_adjusted + ".json"
+        filePath = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\malware"
+        file = filePath +  "\\"+ fileName
+
+        with open(file, "w") as outfile:
+            json.dump(data, outfile)
+
+
+
+
+
     def get_subreddit_data(self, before, after):
         epoch_before = str(self.get_epoch_time(before))
         epoch_after = str(self.get_epoch_time(after))
         response = requests.get("https://api.pushshift.io/reddit/search/comment/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit=malware" )
-        print(epoch_before)
-        print(before)
-        print(response.text)
+
+        submission_response = requests.get("https://api.pushshift.io/reddit/search/submission/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit=malware")
+        try:
+            print(before)
+            print(response.text)
+            response_dict = json.loads(response.text)
+            submission_response_dict = json.loads(submission_response.text)
+            self.writeToFile( "malware", str(before), response_dict)
+            self.writeToFileSubmission("malware",str(before), submission_response_dict)
+
+        except json.decoder.JSONDecodeError:
+            response_dict = None
+            print(response_dict)
 
     def master_loop(self):
         i = 0
-        for timestamp in self.datespan(datetime(2021, 1, 1, 0,1), datetime(2022, 1, 3, 0, 1),delta=timedelta(days=1)):
+        for timestamp in self.datespan(datetime(2022, 6, 20, 0,1), datetime(2023, 1, 3, 0, 1),delta=timedelta(days=1)):
             if i == 0:
                 before = timestamp
             elif i == 1:
