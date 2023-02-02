@@ -48,98 +48,500 @@ class Reddit_Data:
         date_adjusted = date_adjusted.replace(":", "_")
 
         fileName = subreddit_name + date_adjusted + ".json"
-        filePath = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\malware"
+        filePath = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\" + subreddit_name + "Comments"
         file = filePath +  "\\"+ fileName
 
         with open(file, "w") as outfile:
             json.dump(data, outfile)
 
 
+    def writeJSONSubmissionToCSV(self):
+
+            filepath = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\Hacking_Tutorials_submissions.json"
+            root_url = "https://www.reddit.com/"
+            data_dict = {
+                "Post ID": [],
+                "Username": [],
+                "Post Body": [],
+                "Subreddit": [],
+                "Date": [],
+                "Score": [],
+                "Embedded URL": [],
+                "URL": []
+            }
+            with open(filepath, 'r', encoding='utf-8') as f:
+                try:
+
+                    for line in f:
+                            data = json.loads(line)
+                            data_dict['Post ID'].append(data['id'])
+                            data_dict['Username'].append(data['author'])
+                            data_dict['Post Body'].append(data['selftext'])
+                            data_dict['Date'].append(data['created_utc'])
+                            data_dict['Subreddit'].append(data['subreddit'])
+                            data_dict['Embedded URL'].append(data['url'])
+                            data_dict['URL'].append(root_url + data['permalink']+".com")
+                            data_dict['Score'].append(data['score'])
+                except UnicodeDecodeError:
+                    print("UnicodeDecodeError")
+
+            df = pd.DataFrame(data_dict)
+            df.to_csv("Hacking_Tutorials_submissions.csv")
 
 
-
-    def get_subreddit_data(self, before, after):
+    def get_subreddit_data(self, subreddit, before, after):
         epoch_before = str(self.get_epoch_time(before))
         epoch_after = str(self.get_epoch_time(after))
         try:
-            response = requests.get("https://api.pushshift.io/reddit/search/comment/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit=malware" )
-            time.sleep(2)
-            #submission_response = requests.get("https://api.pushshift.io/reddit/search/submission/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit=malware")
+            #https://api.pushshift.io/reddit/comment/search?html_decode=true&after=1314342000&before=1314514800&subreddit=blackhat&size=10
+            #response = requests.get("https://api.pushshift.io/reddit/comment/search?html_decode=true&after=1314342000&before=1314514800&subreddit=blackhat&size=100")
+            response = requests.get("https://api.pushshift.io/reddit/search/comment/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit="+ subreddit + "&size=1000")
+            time.sleep(1.5)
+            #submission_response = requests.get("https://api.pushshift.io/reddit/search/submission/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit=malware" + "&size=1000")
 
         except "Too Many Requests" in response.text :
             print("waiting to get all requests")
             time.sleep(10)
-            response = requests.get("https://api.pushshift.io/reddit/search/comment/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit=malware" )
-
-
-
-
+            response = requests.get("https://api.pushshift.io/reddit/search/comment/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit=" + subreddit+ "&size=1000")
 
         try:
             print(before)
             print(response.text)
             response_dict = json.loads(response.text)
             #submission_response_dict = json.loads(submission_response.text)
-            self.writeToFile( "malware", str(before), response_dict)
+            self.writeToFile( subreddit, str(before), response_dict)
 
             #self.writeToFileSubmission("malware",str(before), submission_response_dict)
 
         except json.decoder.JSONDecodeError:
             response_dict = None
             print(response_dict)
-    def process_JSON_to_CSV(self):
-        directory = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\malware"
+    def process_JSON_to_CSV(self, subreddit):
+        directory = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\" + subreddit +"Comments"
         list_of_data = []
         dict1 = {}
         data_dict = {
-
             "Post ID": [],
             "Username": [],
             "Comment Body": [],
-            "CommentID":[],
+            "CommentID": [],
             "Date": [],
             "Score": []
+
         }
+
         for filename in os.listdir(directory):
             f = os.path.join(directory, filename)
             # checking if it is a file
             # new_name = str(f) + ".json"
             # os.rename(f, new_name)
-            with open(f, 'r') as file:
-                temp_data = json.load(file)
-                temp_data2 = temp_data['data']
-                for data in temp_data2:
-                    data_dict['Post ID'].append(data['link_id'])
-                    data_dict['Username'].append(data['author'])
-                    data_dict['Comment Body'].append(data['body'])
-                    data_dict['Date'].append(data['utc_datetime_str'])
-                    data_dict['CommentID'].append(data['id'])
-                    data_dict['Score'].append(data['score'])
+            try:
+                with open(f, 'r') as file:
+                    temp_data = json.load(file)
+                    temp_data2 = temp_data['data']
+                    for data in temp_data2:
+                        data_dict['Post ID'].append(data['link_id'])
+                        data_dict['Username'].append(data['author'])
+                        data_dict['Comment Body'].append(data['body'])
+                        data_dict['Date'].append(data['utc_datetime_str'])
+                        data_dict['CommentID'].append(data['id'])
+                        data_dict['Score'].append(data['score'])
+            except OSError:
+                continue
+
 
 
 
         df = pd.DataFrame(data_dict)
-        df.to_csv("C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\malwareComments.csv")
+        df.to_csv("C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\"+subreddit+"Comments.csv")
 
     def master_loop(self):
-        i = 0
-        for timestamp in self.datespan(datetime(2017, 8, 16, 0,1), datetime(2023, 1, 3, 0, 1),delta=timedelta(days=1)):
-            if i == 0:
-                before = timestamp
-            elif i == 1:
-                after  = timestamp
-            else:
-                self.get_subreddit_data(before, after)
-                prev = after
-                next = timestamp
-                before = after
-                after = next
-            i+= 1
+        i = 0#"hacking","hacking_tutorials", "howtohack", "cybersecurity"
+        list_of_subreddits = [ "blackhat"]
+        for subreddit in list_of_subreddits:
+            for timestamp in self.datespan(datetime(2011, 8, 26, 0,1), datetime(2011, 9, 2, 0, 1),delta=timedelta(days=1)):
+                if i == 0:
+                    before = timestamp
+                elif i == 1:
+                    after  = timestamp
+                else:
+                    self.get_subreddit_data(subreddit,before, after)
+                    prev = after
+                    next = timestamp
+                    before = after
+                    after = next
+                i+= 1
+           #self.process_JSON_to_CSV(subreddit)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     reddit = Reddit_Data()
-    reddit.process_JSON_to_CSV()
+    reddit.writeJSONSubmissionToCSV()
+
+
+
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/# This is a sample Python script.
+
+# Press Shift+F10 to execute it or replace it with your code.
+# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+
+
+# This is a sample Python script.
+
+# Press ⌃R to execute it or replace it with your code.
+# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+import requests
+import json
+import time
+import os.path
+from os import path
+import os, glob, json, csv
+import pandas as pd
+
+
+from datetime import datetime, timedelta
+
+class Reddit_Data:
+    def datespan(self,startDate, endDate, delta=timedelta(days=1)):
+        currentDate = startDate
+        while currentDate < endDate:
+            yield currentDate
+            currentDate += delta
+
+    #epoch time value to add to url of request
+    def get_epoch_time(self, rawtime):
+        epoch_time = rawtime.timestamp()
+        return int(epoch_time)
+
+    def writeToFileSubmission(self ,subreddit_name, date, data):
+        date_adjusted = date.replace(" ", "")
+        date_adjusted = date_adjusted.replace("-", "_")
+        date_adjusted = date_adjusted.replace(":", "_")
+
+        fileName = subreddit_name + "Submission" + date_adjusted + ".json"
+        filePath = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\malwareSubmission"
+        file = filePath + "\\" + fileName
+
+        with open(file, "w") as outfile:
+            json.dump(data, outfile)
+    def writeToFile(self, subreddit_name, date, data):
+        date_adjusted = date.replace(" ", "")
+        date_adjusted = date_adjusted.replace("-", "_")
+        date_adjusted = date_adjusted.replace(":", "_")
+
+        fileName = subreddit_name + date_adjusted + ".json"
+        filePath = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\" + subreddit_name + "Comments"
+        file = filePath +  "\\"+ fileName
+
+        with open(file, "w") as outfile:
+            json.dump(data, outfile)
+
+
+    def writeJSONSubmissionToCSV(self):
+
+            filepath = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\Hacking_Tutorials_submissions.json"
+            root_url = "https://www.reddit.com/"
+            data_dict = {
+                "Post ID": [],
+                "Username": [],
+                "Post Body": [],
+                "Subreddit": [],
+                "Date": [],
+                "Score": [],
+                "Embedded URL": [],
+                "URL": []
+            }
+            with open(filepath, 'r', encoding='utf-8') as f:
+                try:
+
+                    for line in f:
+                            data = json.loads(line)
+                            data_dict['Post ID'].append(data['id'])
+                            data_dict['Username'].append(data['author'])
+                            data_dict['Post Body'].append(data['selftext'])
+                            data_dict['Date'].append(data['created_utc'])
+                            data_dict['Subreddit'].append(data['subreddit'])
+                            data_dict['Embedded URL'].append(data['url'])
+                            data_dict['URL'].append(root_url + data['permalink']+".com")
+                            data_dict['Score'].append(data['score'])
+                except UnicodeDecodeError:
+                    print("UnicodeDecodeError")
+
+            df = pd.DataFrame(data_dict)
+            df.to_csv("Hacking_Tutorials_submissions.csv")
+
+
+    def get_subreddit_data(self, subreddit, before, after):
+        epoch_before = str(self.get_epoch_time(before))
+        epoch_after = str(self.get_epoch_time(after))
+        try:
+            #https://api.pushshift.io/reddit/comment/search?html_decode=true&after=1314342000&before=1314514800&subreddit=blackhat&size=10
+            #response = requests.get("https://api.pushshift.io/reddit/comment/search?html_decode=true&after=1314342000&before=1314514800&subreddit=blackhat&size=100")
+            response = requests.get("https://api.pushshift.io/reddit/search/comment/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit="+ subreddit + "&size=1000")
+            time.sleep(1.5)
+            #submission_response = requests.get("https://api.pushshift.io/reddit/search/submission/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit=malware" + "&size=1000")
+
+        except "Too Many Requests" in response.text :
+            print("waiting to get all requests")
+            time.sleep(10)
+            response = requests.get("https://api.pushshift.io/reddit/search/comment/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit=" + subreddit+ "&size=1000")
+
+        try:
+            print(before)
+            print(response.text)
+            response_dict = json.loads(response.text)
+            #submission_response_dict = json.loads(submission_response.text)
+            self.writeToFile( subreddit, str(before), response_dict)
+
+            #self.writeToFileSubmission("malware",str(before), submission_response_dict)
+
+        except json.decoder.JSONDecodeError:
+            response_dict = None
+            print(response_dict)
+    def process_JSON_to_CSV(self, subreddit):
+        directory = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\" + subreddit +"Comments"
+        list_of_data = []
+        dict1 = {}
+        data_dict = {
+            "Post ID": [],
+            "Username": [],
+            "Comment Body": [],
+            "CommentID": [],
+            "Date": [],
+            "Score": []
+
+        }
+
+        for filename in os.listdir(directory):
+            f = os.path.join(directory, filename)
+            # checking if it is a file
+            # new_name = str(f) + ".json"
+            # os.rename(f, new_name)
+            try:
+                with open(f, 'r') as file:
+                    temp_data = json.load(file)
+                    temp_data2 = temp_data['data']
+                    for data in temp_data2:
+                        data_dict['Post ID'].append(data['link_id'])
+                        data_dict['Username'].append(data['author'])
+                        data_dict['Comment Body'].append(data['body'])
+                        data_dict['Date'].append(data['utc_datetime_str'])
+                        data_dict['CommentID'].append(data['id'])
+                        data_dict['Score'].append(data['score'])
+            except OSError:
+                continue
+
+
+
+
+        df = pd.DataFrame(data_dict)
+        df.to_csv("C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\"+subreddit+"Comments.csv")
+
+    def master_loop(self):
+        i = 0#"hacking","hacking_tutorials", "howtohack", "cybersecurity"
+        list_of_subreddits = [ "blackhat"]
+        for subreddit in list_of_subreddits:
+            for timestamp in self.datespan(datetime(2011, 8, 26, 0,1), datetime(2011, 9, 2, 0, 1),delta=timedelta(days=1)):
+                if i == 0:
+                    before = timestamp
+                elif i == 1:
+                    after  = timestamp
+                else:
+                    self.get_subreddit_data(subreddit,before, after)
+                    prev = after
+                    next = timestamp
+                    before = after
+                    after = next
+                i+= 1
+           #self.process_JSON_to_CSV(subreddit)
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    reddit = Reddit_Data()
+    reddit.writeJSONSubmissionToCSV()
+
+
+
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/# This is a sample Python script.
+
+# Press Shift+F10 to execute it or replace it with your code.
+# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+
+
+# This is a sample Python script.
+
+# Press ⌃R to execute it or replace it with your code.
+# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+import requests
+import json
+import time
+import os.path
+from os import path
+import os, glob, json, csv
+import pandas as pd
+
+
+from datetime import datetime, timedelta
+
+class Reddit_Data:
+    def datespan(self,startDate, endDate, delta=timedelta(days=1)):
+        currentDate = startDate
+        while currentDate < endDate:
+            yield currentDate
+            currentDate += delta
+
+    #epoch time value to add to url of request
+    def get_epoch_time(self, rawtime):
+        epoch_time = rawtime.timestamp()
+        return int(epoch_time)
+
+    def writeToFileSubmission(self ,subreddit_name, date, data):
+        date_adjusted = date.replace(" ", "")
+        date_adjusted = date_adjusted.replace("-", "_")
+        date_adjusted = date_adjusted.replace(":", "_")
+
+        fileName = subreddit_name + "Submission" + date_adjusted + ".json"
+        filePath = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\malwareSubmission"
+        file = filePath + "\\" + fileName
+
+        with open(file, "w") as outfile:
+            json.dump(data, outfile)
+    def writeToFile(self, subreddit_name, date, data):
+        date_adjusted = date.replace(" ", "")
+        date_adjusted = date_adjusted.replace("-", "_")
+        date_adjusted = date_adjusted.replace(":", "_")
+
+        fileName = subreddit_name + date_adjusted + ".json"
+        filePath = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\" + subreddit_name + "Comments"
+        file = filePath +  "\\"+ fileName
+
+        with open(file, "w") as outfile:
+            json.dump(data, outfile)
+
+
+    def writeJSONSubmissionToCSV(self):
+
+            filepath = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\Hacking_Tutorials_submissions.json"
+            root_url = "https://www.reddit.com/"
+            data_dict = {
+                "Post ID": [],
+                "Username": [],
+                "Post Body": [],
+                "Subreddit": [],
+                "Date": [],
+                "Score": [],
+                "Embedded URL": [],
+                "URL": []
+            }
+            with open(filepath, 'r', encoding='utf-8') as f:
+                try:
+
+                    for line in f:
+                            data = json.loads(line)
+                            data_dict['Post ID'].append(data['id'])
+                            data_dict['Username'].append(data['author'])
+                            data_dict['Post Body'].append(data['selftext'])
+                            data_dict['Date'].append(data['created_utc'])
+                            data_dict['Subreddit'].append(data['subreddit'])
+                            data_dict['Embedded URL'].append(data['url'])
+                            data_dict['URL'].append(root_url + data['permalink']+".com")
+                            data_dict['Score'].append(data['score'])
+                except UnicodeDecodeError:
+                    print("UnicodeDecodeError")
+
+            df = pd.DataFrame(data_dict)
+            df.to_csv("Hacking_Tutorials_submissions.csv")
+
+
+    def get_subreddit_data(self, subreddit, before, after):
+        epoch_before = str(self.get_epoch_time(before))
+        epoch_after = str(self.get_epoch_time(after))
+        try:
+            #https://api.pushshift.io/reddit/comment/search?html_decode=true&after=1314342000&before=1314514800&subreddit=blackhat&size=10
+            #response = requests.get("https://api.pushshift.io/reddit/comment/search?html_decode=true&after=1314342000&before=1314514800&subreddit=blackhat&size=100")
+            response = requests.get("https://api.pushshift.io/reddit/search/comment/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit="+ subreddit + "&size=1000")
+            time.sleep(1.5)
+            #submission_response = requests.get("https://api.pushshift.io/reddit/search/submission/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit=malware" + "&size=1000")
+
+        except "Too Many Requests" in response.text :
+            print("waiting to get all requests")
+            time.sleep(10)
+            response = requests.get("https://api.pushshift.io/reddit/search/comment/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit=" + subreddit+ "&size=1000")
+
+        try:
+            print(before)
+            print(response.text)
+            response_dict = json.loads(response.text)
+            #submission_response_dict = json.loads(submission_response.text)
+            self.writeToFile( subreddit, str(before), response_dict)
+
+            #self.writeToFileSubmission("malware",str(before), submission_response_dict)
+
+        except json.decoder.JSONDecodeError:
+            response_dict = None
+            print(response_dict)
+    def process_JSON_to_CSV(self, subreddit):
+        directory = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\" + subreddit +"Comments"
+        list_of_data = []
+        dict1 = {}
+        data_dict = {
+            "Post ID": [],
+            "Username": [],
+            "Comment Body": [],
+            "CommentID": [],
+            "Date": [],
+            "Score": []
+
+        }
+
+        for filename in os.listdir(directory):
+            f = os.path.join(directory, filename)
+            # checking if it is a file
+            # new_name = str(f) + ".json"
+            # os.rename(f, new_name)
+            try:
+                with open(f, 'r') as file:
+                    temp_data = json.load(file)
+                    temp_data2 = temp_data['data']
+                    for data in temp_data2:
+                        data_dict['Post ID'].append(data['link_id'])
+                        data_dict['Username'].append(data['author'])
+                        data_dict['Comment Body'].append(data['body'])
+                        data_dict['Date'].append(data['utc_datetime_str'])
+                        data_dict['CommentID'].append(data['id'])
+                        data_dict['Score'].append(data['score'])
+            except OSError:
+                continue
+
+
+
+
+        df = pd.DataFrame(data_dict)
+        df.to_csv("C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\"+subreddit+"Comments.csv")
+
+    def master_loop(self):
+        i = 0#"hacking","hacking_tutorials", "howtohack", "cybersecurity"
+        list_of_subreddits = [ "blackhat"]
+        for subreddit in list_of_subreddits:
+            for timestamp in self.datespan(datetime(2011, 8, 26, 0,1), datetime(2011, 9, 2, 0, 1),delta=timedelta(days=1)):
+                if i == 0:
+                    before = timestamp
+                elif i == 1:
+                    after  = timestamp
+                else:
+                    self.get_subreddit_data(subreddit,before, after)
+                    prev = after
+                    next = timestamp
+                    before = after
+                    after = next
+                i+= 1
+           #self.process_JSON_to_CSV(subreddit)
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    reddit = Reddit_Data()
+    reddit.writeJSONSubmissionToCSV()
+
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
