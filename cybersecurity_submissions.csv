@@ -1,0 +1,103 @@
+,Post ID,Username,Post Body,Subreddit,Date,Score,Embedded URL,URL
+0,cetfn,LocSic,,computerforensics,1276523969,3,NA,http://blog.digital-detective.co.uk/2010/06/manual-identification-of-suspect.html
+1,fp6v4,[deleted],,computerforensics,1298242643,2,NA,http://forensic4cast.com/2011/01/15/detecting-cmos-clock-changes/
+2,fp5d0,[deleted],,computerforensics,1298237167,1,NA,http://blog.mandiant.com/archives/1593
+3,fpqaq,[deleted],,computerforensics,1298316293,4,NA,http://www.appleexaminer.com/MacsAndOS/Analysis/HowTo/POSXWKSTN/POSXWKSTN.html
+4,fpx9i,[deleted],,computerforensics,1298335779,1,NA,http://computer-forensics.sans.org/blog/2011/02/02/forensically-sound-mac-acquisition-target-mode
+5,frbi3,[deleted],,computerforensics,1298496489,4,NA,http://jessekornblum.livejournal.com/268824.html
+6,fvymd,[deleted],,computerforensics,1299091635,1,NA,http://sleuthkit.org/sleuthkit/download.php
+7,g1aca,[deleted],,computerforensics,1299776450,4,NA,http://dfsforensics.blogspot.com/2011/03/bringing-linux-support-to-volatility.html
+8,ghsn9,[deleted],,computerforensics,1301859854,2,NA,http://www.plainsight.info/
+9,gj1cz,[deleted],,computerforensics,1302002511,5,NA,http://www.govcomm.harris.com/crucial-security/blog/2011-03-30_Crack-Image-FileVault-Sparsebundle.asp
+10,gm7c2,[deleted],,computerforensics,1302364646,2,NA,http://www.osdfcon.org
+11,gpwjs,[deleted],"Was doing some digging to see if the Xbox360 has any artifacts from DVD playback (e.g. lnk files, volume names, etc). It seems one should be able to just hook up the FATX HDD to W7 and assign a drive letter (write blocking, etc). Sadly, neither I nor work has an Xbox360 to dig around on to see what sort of data is left behind.
+
+",computerforensics,1302789509,3,NA,http://www.reddit.com/r/computerforensics/comments/gpwjs/anybody_have_a_spare_xbox360_laying_around_need/
+12,gqmwx,[deleted],The [digital version](http://www.amazon.com/Digital-Forensics-Source-Tools-ebook/dp/B004W7DO78/) of *Digital Forensics with Open Source Tools* by Cory Altheide and Harlan Carvey is available today.  [Print version](http://www.amazon.com/Digital-Forensics-Open-Source-Tools/dp/1597495867/) will be available on the 29th of April.,computerforensics,1302860988,5,NA,http://www.reddit.com/r/computerforensics/comments/gqmwx/bookdigital_forensics_with_open_source_tools/
+13,h2sto,iamgrasso,Just seeing if anyone is heading to South Carolina for Techno Security this June. Possible reddit meet up if anyone is going?,computerforensics,1304389940,1,NA,http://www.reddit.com/r/computerforensics/comments/h2sto/anyone_heading_to_techno_security_in_june/
+14,h53rm,[deleted],,computerforensics,1304629032,5,NA,http://dfsforensics.blogspot.com/2011/04/announcing-scalpel-20.html
+15,h6o0d,[deleted],"Taking the idea from the  [/r/netsec podcasts thread](http://www.reddit.com/r/netsec/comments/fjvv7/what_netseclike_podcasts_do_you_listen_to/), I thought I'd compile a list that relate do Digital Forensics and Data Recovery.
+
+* [Cyber Crime 101](http://www.cybercrime101.com/) ([RSS](http://cybercrime101.libsyn.com/rss""))
+* [CyberSpeak](http://cyberspeak.libsyn.com/) ([RSS](http://cyberspeak.libsyn.com/rss))
+* [Digital Detectives](http://legaltalknetwork.com/podcasts/digital-detectives/) ([RSS](http://legaltalknetwork.com/RSS/TDD_feed.xml))
+* [Forensic 4cast](http://www.forensic4cast.com/) ([RSS](http://forensic4cast.com/?feed=podcast))
+* [Inside The Core^nb](http://insidethecore.com/) ([RSS](http://feeds2.feedburner.com/insidethecore))
+* [My Hard Drive Died](http://podnutz.com/myharddrivedied) ([RSS](http://feeds2.feedburner.com/myharddrivedied))
+
+If anyone has any other suggestions, I'm sure we'd all love to hear them.
+
+nb: ~~This podcast appears to have been abandoned, which is unfortunate as it was a good source of Mac related forensic information.~~ It's alive: episode 13 has been posted
+",computerforensics,1304868110,17,NA,http://www.reddit.com/r/computerforensics/comments/h6o0d/digital_forensics_podcasts/
+16,h93r9,[deleted],,computerforensics,1305136878,5,NA,http://blog.didierstevens.com/programs/xorsearch/
+17,hk6z3,[deleted],,computerforensics,1306365462,1,NA,http://computer-forensics.sans.org/blog/
+18,hk2wi,[deleted],,computerforensics,1306355868,5,NA,https://www.evernote.com/pub/markmckinnon/forensicartifacts
+19,hk2g3,[deleted],,computerforensics,1306354873,1,NA,https://www.evernote.com/pub/markmckinnon/forensicartifacts
+20,hofv5,[deleted],,computerforensics,1306869043,6,NA,http://blog.zeltser.com/post/5395785705/digital-forensics-and-incident-response-disciplines
+21,hu3v4,[deleted],,computerforensics,1307484859,6,NA,http://computer.forensikblog.de/en/2011/06/mac_os_x_memory_analysis_with_volafox.html
+22,i2ezx,akwala,,computerforensics,1308341584,1,NA,http://www.cybermarshal.com/index.php/cyber-marshal-utilities/dropbox-reader
+23,i28o1,[deleted],,computerforensics,1308328148,16,NA,http://computer-forensics.sans.org/blog/2011/06/17/digital-forensics-rain-drop-keeps-falling-on-my-box
+24,i3sj2,[deleted],,computerforensics,1308516894,14,NA,http://www.forensicfocus.com/images-and-challenges
+25,i3kdm,[deleted],"I am currently working on a android forensic software. You can find it @ [1] https://code.google.com/p/aft/ I need your help to finish it as I don't own an android phone and do most of my work on the virtual machine.
+
+As of now the program extracts databases and photos from the phone and prepares a report on browser history and account information. The end product will produce reports on call logs, SMS sent/recieved, contacts and saved passwords. Will be working on extracting information from other applications on the next version of the code.  
+
+Have written a module to extract EXIF information from the photos. Can anyone tell what are information which need to be extracted from the forensic point of view. I know that the latitude and longitude information are important, what else information need to be displayed.
+
+Also please suggest any features which can be included or bugs which you find. Contact me if you want to help out with coding or testing.
+
+PS: This is more of a learning project as I am new to both python and forensics. So go easy on me :)",computerforensics,1308491311,1,NA,http://www.reddit.com/r/computerforensics/comments/i3kdm/need_help_finishing_my_android_forensic_toolkit/
+26,i4ndr,LocSic,,computerforensics,1308603341,40,NA,http://forensiccontrol.com/resources/freetools/
+27,i5hbp,Unbelievr,"Hi, computerforensics.
+
+I have managed to restore a partition with Mac OS X and am trying to get information out of the ""login.keychain"" and ""system.keychain"". I am aware that the usernames are plaintext and can be read with any editor, but I have problems finding a tool that can decrypt the password(s). As far as I have been able to research, there are no common tools to do this that will run on Windows/Linux.
+
+I do always know the system passwords and, for the routine, I could probably find another Mac, boot it up and run the built-in tools for ""unlocking"". But since the encryption scheme and all is known (Apple even released the source), I figured there *have* to be some kind of tool out there (commercial or not) that can do this job. Anyone have any experience with this?",computerforensics,1308682355,10,NA,http://www.reddit.com/r/computerforensics/comments/i5hbp/tools_for_reading_recovered_mac_os_x_keychains_in/
+28,i59jp,labgeek,,computerforensics,1308665863,6,NA,http://crucialsecurityblog.harris.com/2011/06/08/virtual-machine-data-recovery-using-the-open-vmfs-driver/
+29,i4st4,cwm44,"Ok, so for some unknown reason my Linux Mint install inside Vista keeps getting the username reverted &amp; the password corrupted to a previous install's. I have a BackTrack 5 install(I'm curious about forensics &amp; security so I figured it would be a good way to learn) from which I can access the partition. Is there a way to find the misbehaving password when it reverts?",computerforensics,1308616053,3,NA,http://www.reddit.com/r/computerforensics/comments/i4st4/hey_guys_i_have_a_problem_you_might_find_slightly/
+30,i5szy,iamevltwin,,computerforensics,1308707658,6,NA,http://crucialsecurityblog.harris.com/2011/06/22/the-apple-system-log-â€“-part-1/
+31,i5smo,iamevltwin,,computerforensics,1308706796,9,NA,http://crucialsecurityblog.harris.com/2011/03/14/typedurls-part-1/
+32,i6q0q,autotom,"Forgive me if this is particularly basic, im only just beginning to learn about computer forensics.
+
+Lets say i'm running a Virtual Machine to hack the gibson, Does the host system **unknowingly** store any information about the activities of its VM, I know this is probably platform dependant.
+
+Lets say the host system could be Windows, OSX or any GNU/Linux Distro",computerforensics,1308791122,1,NA,http://www.reddit.com/r/computerforensics/comments/i6q0q/does_the_host_of_a_vm_store_any_useful/
+33,i8ozb,technoskald,,computerforensics,1308976541,17,NA,http://infosuck.org/0x003c.png
+34,i9ced,Lasereye,,computerforensics,1309061555,22,NA,http://hackavision.blogspot.com/
+35,iaquw,a_culther0,But I'm having problems getting passed square 1.  NMAP'ing a known IP address with known open SSH ports and a couple of other open ports is yielding that all the ports are filtered.  How do you get beyond this?,computerforensics,1309213985,0,NA,http://www.reddit.com/r/computerforensics/comments/iaquw/started_attempting_to_break_into_my_own_computer/
+36,ie9rh,SuppositoryOfNolig,"I have a situation where I recovered some files that had been deleted using FTK Imager.  I can tell that the files in question are encrypted with EFS, but I can't figure out how I can decrypt them, any tips would be appreciated.  
+
+I don't have access to, or money to buy FTK or EnCase.  I have the original hard drive, and have made a raw image of the drive. Since it is Windows 7, all the passwords are not stored as Lanman hash, so harder to crack.  I can put the hard drive in a machine and boot it up.  Since it is on a domain, I can log in as the original user with a password that I set. (I don't know what the password was.)",computerforensics,1309534180,6,NA,http://www.reddit.com/r/computerforensics/comments/ie9rh/deleted_efs_files_on_windows_7/
+37,ih309,[deleted],"My friend asked me this question, so is it possible to do forensic analysis of printers? I know that the big network printers have hard drive which can be taken out to do forensic examination, but what about the small printer like the HP laserjet all-in-one series which uses RAM for storing data, how does one go about examining these type of printers?",computerforensics,1309863797,1,NA,http://www.reddit.com/r/computerforensics/comments/ih309/any_suggestions_on_doing_forensics_on_printers/
+38,ii04s,sanitybit,,computerforensics,1309948103,9,NA,https://docs.google.com/gview?url=http%3A%2F%2Fwww1.informatik.uni-erlangen.de%2Ffilepool%2Fthesis%2Fdiplomarbeit-2011-stuettgen.pdf?pli=1
+39,ihzj5,sanitybit,,computerforensics,1309945491,7,NA,http://www.forensic4cast.com/2011/07/flashpost-google-plus-artefacts-url-forwarding/
+40,ihycw,[deleted],,computerforensics,1309940374,1,NA,https://docs.google.com/gview?url=http%3A%2F%2Fwww1.informatik.uni-erlangen.de%2Ffilepool%2Fthesis%2Fdiplomarbeit-2011-stuettgen.pdf?pli=1
+41,ikbpf,net9,,computerforensics,1310156170,0,NA,http://pozycjonowanie.prv.pl
+42,iocfz,johnlennon123,"Machine name: Tyan Computers S8230-D (S8230WGM4NR-DL*)
+CPU options:
+- AMD 45nm 8-Core Processor
+- AMD 12-Core Opteron 6100 Processor
+Chipset: AMD SR5690 + SP5100 Chipset
+HD bus: SATA15035
+Front Side bus options:
+Memory Speed options: PC3-10666 DDR3-1333 240pin Registered ECC SDRAM DIMM
+Special notes: This system supports either Registered ECC or Unbuffered ECC memory. Mixing Registered ECC and Unbuffered ECC modules is not supported within this system.",computerforensics,1310555973,0,NA,http://www.reddit.com/r/computerforensics/comments/iocfz/tyan_computers_s8230d_s8230wgm4nrdl_ddr31333mhz/
+43,iqmct,sanitybit,,computerforensics,1310753667,9,NA,http://www.tzworks.net/prototype_page.php?proto_id=5
+44,iv3tn,Lasereye,,computerforensics,1311190449,0,NA,http://www.hackavision.com/2011/07/sniffing-passwords-over-wifi-connection.html
+45,iugnq,nats15,"Pardon my vague details, I am trying to be as desecrate as possible.  I have not caused this problem, but I am the most recent one to have this conundrum dumped on them.
+
+I have a client who had a DB over written with a blank DB.  Not exactly how we got to this point since there is no installation media on the server.  That being said, a friend suggested I review the logs and temp folder to see if anything is left of the original DB, or a trail in the logs.
+
+I have reviewed the event viewer logs, but they are a dead end (they are only a few days old).  Is there a different type of log I can be viewing to try and find out at the very least how installation media was conjured out of the ether. 
+
+",computerforensics,1311131548,5,NA,http://www.reddit.com/r/computerforensics/comments/iugnq/windows_server_2008_need_to_view_installation_logs/
+46,ixqit,nocsi,Can we make a list of essential digital forensics certifications? I'm sure we're all aware that the state of the industry right now necessitates having various letters after our names.,computerforensics,1311439693,15,NA,http://www.reddit.com/r/computerforensics/comments/ixqit/essential_digital_forensics_certifications/
+47,iz4i2,zahiritbd,,computerforensics,1311597372,1,NA,http://www.delicious.com/zahiritbd
+48,iywap,nocsi,,computerforensics,1311568495,9,NA,http://blog.zeltser.com/post/7952715630/memory-acquisition-with-dumpit-for-dfir
+49,iyvxj,nocsi,,computerforensics,1311567555,0,NA,http://code.google.com/p/android/issues/detail?id=10809#c44
+50,iyugn,contractor12,,computerforensics,1311564179,1,NA,http://batonrougecomputerservices.com/computer-repair-baton-rouge.html
+51,j1fg1,nocsi,,computerforensics,1311794791,11,NA,http://www.virtual-strategy.com/2011/07/26/passware-proves-mac-os-lion-insecure-revealing-login-passwords-minutes
+52,j1ezo,nocsi,,computerforensics,1311794005,6,NA,http://www.govinfosecurity.com/podcasts.php?podcastID=1200
+53,j1emw,nocsi,,computerforensics,1311793401,5,NA,http://computer-forensics.sans.org/blog/2011/07/21/live-mem-forensic-analysis
+54,j4wx7,jmam13dx,,computerforensics,1312131389,1,NA,http://syntaxerror.web.id/komputer/download-ultra-iso-premium-terbaru-full-gratis.htm
+55,j4up6,mngyrnbfccbd,,computerforensics,1312124504,1,NA,http://mashtwitt.com/?p=1427
