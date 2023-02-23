@@ -8,6 +8,7 @@
 
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+import boto3
 import requests
 import json
 import time
@@ -15,11 +16,37 @@ import os.path
 from os import path
 import os, glob, json, csv
 import pandas as pd
+import boto
+import boto.s3
+import sys
+from boto.s3.key import Key
+import boto3
 
 
 from datetime import datetime, timedelta
 
 class Reddit_Data:
+    def move_data_to_S3(self):
+       s3 = boto3.client('s3',
+            aws_access_key_id='AKIAQMWTWG3ZEPZ6GCGT',
+            aws_secret_access_key='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',
+
+        )
+
+       bucket_name = 'arzhangvredditdata'
+       path = "Comments_CSV"
+
+     #  s3.put_object(Bucket=, Key=(directory_name + '/'))
+       #for filename in os.listdir(path):
+
+       #     f = os.path.join(path, filename)
+
+       s3.put_object(Bucket=bucket_name, Key='test-folder/')
+       
+       #file_path = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\Comments_CSV"
+       #with open(file_path + "\\blackhat_comments.csv", 'rb') as data:
+           #s3.upload_fileobj(data, 'arzhangvredditdata', 'blackhat_comments.csv')
+
     def datespan(self,startDate, endDate, delta=timedelta(days=1)):
         currentDate = startDate
         while currentDate < endDate:
@@ -56,10 +83,10 @@ class Reddit_Data:
 
 
     def writeJSONSubmissionToCSV(self):
-        subreddits = [ "privacy_submissions","blackhat_submissions", "cybersecurity_submissions", "hacking_submissions",
-                      "Hacking_Tutorials_submissions", "computerforensics_submissions"]
+        subreddits = ["Hacking_Tutorials_submissions"]
+        #subreddits = [ "privacy_submissions","blackhat_submissions", "cybersecurity_submissions", "hacking_submissions","Hacking_Tutorials_submissions", "computerforensics_submissions"]
         for i in subreddits:
-            filepath = "/Users/arzhangvaladkhani/PycharmProjects/redditRequestParser/Submissions/" + i + ".json"
+            filepath = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\subredditDataFromRedditor\\" + i + ".json"
             root_url = "https://www.reddit.com/"
             data_dict = {
                 "Post ID": [],
@@ -81,7 +108,8 @@ class Reddit_Data:
                             data_dict['Comment ID'].append(data['id'])
                             data_dict['Username'].append(data['author'])
                             data_dict['Body'].append(data['selftext'])
-                            data_dict['Date'].append(data['created_utc'])
+                            created_utc = datetime.fromtimestamp( int(data['created_utc']))
+                            data_dict['Date'].append(created_utc)
                             data_dict['Subreddit'].append(data['subreddit'])
                             data_dict['Embedded URL'].append(data['url'])
                             data_dict['URL'].append(root_url + data['permalink']+".com")
@@ -90,11 +118,15 @@ class Reddit_Data:
                     print("UnicodeDecodeError")
 
             df = pd.DataFrame(data_dict)
-            df.to_csv("Hacking_Tutorials_submissions.csv")
+            df.to_csv("C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\Submissions_CSV\\"+ i +".csv")
+
+
     def writeJSONCommentToCSV(self):
-        subreddits = ["privacy_comments", "blackhat_comments", "cybersecurity_comments", "hacking_comments", "Hacking_Tutorials_comments", "computerforensics_comments"]
+        subreddits = ["Hacking_Tutorials_comments"]
+        #subreddits = ["privacy_comments", "blackhat_comments", "cybersecurity_comments", "hacking_comments", "Hacking_Tutorials_comments", "computerforensics_comments"]
         for i in subreddits:
-            filepath = "/Users/arzhangvaladkhani/PycharmProjects/redditRequestParser/Comments/" + i + ".json"
+            filepath = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\subredditDataFromRedditor\\" + i + ".json"
+            #filepath = "/Users/arzhangvaladkhani/PycharmProjects/redditRequestParser/Comments/" + i + ".json"
             root_url = "https://www.reddit.com/"
             data_dict = {
                 "Post ID": [],
@@ -117,7 +149,10 @@ class Reddit_Data:
                             data_dict['Post ID'].append(post_id)
                             data_dict['Comment ID'].append(data['id'])
                             data_dict['Username'].append(data['author'])
-                            data_dict['Body'].append(data['body'])
+                            data_dict['Body'].append(data['body'].replace("\r", "\\r"))
+
+                            #created_utc = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(int(data['Date'])))
+                            #created_utc = datetime.strptime(created_utc, "%Y-%m-%d %H:%M:%S")
                             time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(int(data['created_utc'])))
                             created_utc = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(int(data['created_utc'])))
                             data_dict['Date'].append(created_utc)
@@ -129,7 +164,8 @@ class Reddit_Data:
                     print("UnicodeDecodeError")
 
             df = pd.DataFrame(data_dict)
-            df.to_csv("/Users/arzhangvaladkhani/PycharmProjects/redditRequestParser/comments_csv/privacy_comments.csv")
+            df.to_csv("C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\Comments_CSV\\" + i + ".csv")
+            #df.to_csv("/Users/arzhangvaladkhani/PycharmProjects/redditRequestParser/comments_csv/privacy_comments.csv")
 
 
     def get_subreddit_data(self, subreddit, before, after):
@@ -219,8 +255,9 @@ class Reddit_Data:
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     reddit = Reddit_Data()
-    #reddit.writeJSONCommentToCSV()
     reddit.writeJSONSubmissionToCSV()
+    reddit.writeJSONCommentToCSV()
+    #reddit.move_data_to_S3()
 
 
 
