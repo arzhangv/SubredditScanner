@@ -16,11 +16,8 @@ import os.path
 from os import path
 import os, glob, json, csv
 import pandas as pd
-import boto
-import boto.s3
 import sys
 from boto.s3.key import Key
-import boto3
 
 
 from datetime import datetime, timedelta
@@ -28,8 +25,8 @@ from datetime import datetime, timedelta
 class Reddit_Data:
     def move_data_to_S3(self):
        s3 = boto3.client('s3',
-            aws_access_key_id='AKIAQMWTWG3ZEPZ6GCGT',
-            aws_secret_access_key='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',
+            aws_access_key_id='',
+            aws_secret_access_key='',
 
         )
 
