@@ -16,7 +16,7 @@
 
 
 
-###Storage
+### Storage
 - Configure storage to Amazon S3 buckets and locally as well. 
 &nbsp;
 &nbsp;
