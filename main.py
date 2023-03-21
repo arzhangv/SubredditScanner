@@ -40,7 +40,7 @@ class Reddit_Data:
        
        s3.put_object(Bucket=bucket_name, Key='test-folder/')
        s3.upload_file(
-       Filename="data/downloaded_from_s3.csv",
+       Filename="data/send_a_certain.csv",
        Bucket="sample-bucket-1801",
        Key="new_file.csv")
        file_path = "your file path "
