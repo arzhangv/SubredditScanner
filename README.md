@@ -17,14 +17,18 @@
 ***
 
 ### Data Scraper
-- Making requests on PushShiftIO endpoints on submissions and comments
-- The Query is structured as so scrape data with three parameters: 
+- Making requests on two PushShiftIO endpoints on submissions and comments respectively 
+- The Query is structured as so scrape data with three parameters and the code is listed below: 
   1. Subreddit 
   2. Before (Epoch value or Integer + "s,m,h,d")
   3. After (Epoch value or Integer + "s,m,h,d")
 - For more details on PushShiftIO documentation visit https://github.com/pushshift/api
 ```python
             response = requests.get("https://api.pushshift.io/reddit/search/comment/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit="+subreddit + "&size=1000")
+
+```
+```python
+            response = requests.get("https://api.pushshift.io/reddit/search/submission/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit="+subreddit + "&size=1000")
 
 ```
 - The maximum number of posts that can be returned in one request is 1000 so its important to note that highly active subreddits which can have over 1000 comments or posts in a day. Therefore must have the duration of that is parameters before and after be lessend to extrapulate all posts in a timeframe. 
