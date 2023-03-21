@@ -14,6 +14,7 @@
   <img src="https://github.com/arzhangv/SubredditScanner/blob/main/DiagramV3.png" />
 </p>
 
+***
 
 ### Data Scraper
 - Making requests on PushShiftIO endpoints on submissions and comments
@@ -26,6 +27,7 @@
             response = requests.get("https://api.pushshift.io/reddit/search/comment/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit="+subreddit + "&size=1000")
 
 ```
+***
 ### Storage
 - Configure storage to Amazon S3 buckets and locally as well. 
 &nbsp;
