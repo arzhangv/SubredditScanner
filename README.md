@@ -15,6 +15,15 @@
 </p>
 
 
+### Data Scraper
+- Making requests on PushShiftIO endpoints on submissions and comments
+- The Query is structured as so scrape data with three parameters: 
+  1.) Name of Subreddit 
+  2.) Before a specific time
+  3.) After a specfic time 
+  
+
+
 
 ### Storage
 - Configure storage to Amazon S3 buckets and locally as well. 
