@@ -7,4 +7,4 @@
 &nbsp;
 
 ***
-              ![alt text](https://github.com/arzhangv/SubredditScanner/blob/main/DiagramV3.png)
+![alt text](https://github.com/arzhangv/SubredditScanner/blob/main/DiagramV3.png)
