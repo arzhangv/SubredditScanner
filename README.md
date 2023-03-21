@@ -13,3 +13,28 @@
 <p align="center">
   <img src="https://github.com/arzhangv/SubredditScanner/blob/main/DiagramV3.png" />
 </p>
+
+
+
+###Storage
+- Configure storage to Amazon S3 buckets and locally as well. 
+&nbsp;
+&nbsp;
+- Input AWS credentials to gain access to your S3 bucket located in line 33 in main.py
+
+```python
+ s3 = boto3.client('s3',
+            aws_access_key_id='your-access-key',
+            aws_secret_access_key='your-secret-access-key',
+        )
+```
+
+- Edit lines to select which file, S3 bucket, and the key you would like to utilize
+```python
+ s3.put_object(Bucket=bucket_name, Key='test-folder/')
+       s3.upload_file(
+       Filename="data/send_a_certain.csv",
+       Bucket="sample-bucket-1801",
+       Key="new_file.csv")
+     
+```
