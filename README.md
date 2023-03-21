@@ -4,4 +4,4 @@
 
 - The pipeline for data collection, storage, analysis, and machine learning is explained in the diagram below 
 - Data Pipeline: 
-![alt text](https://github.com/arzhangv/SubredditScanner/blob/main/DiagramV3.png" Logo Title Text 1")
+![alt text](https://github.com/arzhangv/SubredditScanner/blob/main/DiagramV3.png)
