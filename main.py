@@ -24,23 +24,27 @@ from datetime import datetime, timedelta
 
 class Reddit_Data:
     def move_data_to_S3(self):
-       s3 = boto3.client('s3',
-            aws_access_key_id='',
-            aws_secret_access_key='',
-
-        )
-
-       bucket_name = 'arzhangvredditdata'
-       path = "Comments_CSV"
-
-     #  s3.put_object(Bucket=, Key=(directory_name + '/'))
-       #for filename in os.listdir(path):
-
-       #     f = os.path.join(path, filename)
-
-       s3.put_object(Bucket=bucket_name, Key='test-folder/')
+        
+        
+       #bucket_name = 'arzhangvredditdata'
+       #path = "Comments_CSV" 
        
-       #file_path = "C:\\Users\\Arzhang\\PycharmProjects\\getRedditData\\Comments_CSV"
+        #Create instance to connect to an S3 bucket
+        s3 = boto3.client('s3',
+            aws_access_key_id='your-access-key',
+            aws_secret_access_key='your-secret-access-key',
+        )
+    
+
+       
+       
+       s3.put_object(Bucket=bucket_name, Key='test-folder/')
+       s3.upload_file(
+       Filename="data/downloaded_from_s3.csv",
+       Bucket="sample-bucket-1801",
+       Key="new_file.csv")
+       file_path = "your file path "
+    
        #with open(file_path + "\\blackhat_comments.csv", 'rb') as data:
            #s3.upload_fileobj(data, 'arzhangvredditdata', 'blackhat_comments.csv')
 
