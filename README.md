@@ -7,7 +7,6 @@
 &nbsp;
 
 
-
 ***
 <p align="center">
   <img src="https://github.com/arzhangv/SubredditScanner/blob/main/DiagramV3.png" />
