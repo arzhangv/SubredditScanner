@@ -18,10 +18,12 @@
 ### Data Scraper
 - Making requests on PushShiftIO endpoints on submissions and comments
 - The Query is structured as so scrape data with three parameters: 
-  1. Name of Subreddit 
-  2. Before a specific time
-  3. After a specfic time 
-  
+  1. Subreddit 
+  2. Before (Epoch value or Integer + "s,m,h,d")
+  3. After (Epoch value or Integer + "s,m,h,d")
+- For more details on PushShiftIO documentation visit https://github.com/pushshift/api
+```python
+            response = requests.get("https://api.pushshift.io/reddit/search/comment/?after="+ epoch_before +"&before=" + epoch_after +"&subreddit="+subreddit + "&size=1000")
 
 
 
