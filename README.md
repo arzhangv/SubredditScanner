@@ -56,3 +56,14 @@ response = requests.get("https://api.pushshift.io/reddit/search/submission/?afte
        Key="new_file.csv")
      
 ```
+&nbsp;
+&nbsp;
+
+### Data Model 
+
+- PushshiftAPI comment and submission responses are quite extensive, and need to be processed and parsed accordingly 
+- The data is modeled to the values displayed in the column below. 
+
+| Tables        | Are           | Cool  |
+
+
