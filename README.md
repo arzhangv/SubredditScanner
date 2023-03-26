@@ -64,7 +64,7 @@ response = requests.get("https://api.pushshift.io/reddit/search/submission/?afte
 - PushshiftAPI comment and submission responses are quite extensive, and need to be processed and parsed accordingly 
 - The data is modeled to the values displayed in the table below. 
 
-Post ID | Comment ID | Username | Body | Date | URL | Score | Subreddit Name | 
+Post ID | Comment ID | Username | Body | Date | URL | Score | Subreddit Name 
 --- | --- | --- | --- | --- | ---  | --- | --- | ---|
 
 
