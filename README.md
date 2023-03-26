@@ -61,10 +61,11 @@ response = requests.get("https://api.pushshift.io/reddit/search/submission/?afte
 *** 
 ### Data Model 
 
-- PushshiftAPI comment and submission responses are quite extensive, and need to be processed and parsed accordingly 
+- PushshiftAPI comment and submission responses are quite extensive, and need to be processed and parsed accordingly.
 - The data is modeled to the values displayed in the table below. 
 
 Post ID | Comment ID | Username | Body | Date | URL | Score | Subreddit Name |
 --- | --- | --- | --- | --- | ---  | --- | --- | 
 
+- Our current models only rely on only four columns from our model, but future models for SubredditScanner wish to extend the use our dat model
 
