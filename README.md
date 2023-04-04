@@ -10,10 +10,8 @@
 
 
 ***
-<p align="center">
-  <img src="https://github.com/arzhangv/SubredditScanner/blob/main/DiagramV3.png" />
-</p>
 
+<a href="url"><img src="https://github.com/arzhangv/SubredditScanner/blob/main/DiagramV3.png" align="center" height="48" width="48" ></a>
 ***
 
 ### Data Scraper
