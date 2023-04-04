@@ -11,7 +11,7 @@
 
 ***
 
-<a href="url"><img src="https://github.com/arzhangv/SubredditScanner/blob/main/DiagramV3.png" align="center" height="400" width="800" ></a>
+<a href="url"><img src="https://github.com/arzhangv/SubredditScanner/blob/main/DiagramV3.png" align="center" height="500" width="600" ></a>
 ***
 
 ### Data Scraper
