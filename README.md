@@ -4,7 +4,7 @@
 
 - Gain further understing at scale using state of the art clustering algorithms and LDA topic modeling with automatically adjustible parameters back testing to see what the correct number of topics and cluster sizes are. 
 
-- The pipeline for data collection, storage, analysis, and machine learning is explained in the diagram below.
+- The pipeline for data collection, storage, analysis, and machine learning is conceptualized in the diagram below.
 &nbsp;
 &nbsp;
 
